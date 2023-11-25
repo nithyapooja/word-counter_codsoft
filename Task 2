@@ -1,0 +1,54 @@
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+
+  class MyFrame extends JFrame implements ActionListener {
+    JLabel lab1;
+    JButton btn;
+    JTextArea textarea;
+
+    public MyFrame() {
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(800, 600);
+        this.setTitle("Word Counter");
+        this.setLocationRelativeTo(null);
+        this.setLayout(null);
+
+        textarea = new JTextArea("Enter Your Text!");
+        textarea.setBounds(25, 90, 725, 350);
+        textarea.setFont(new Font("Arial", Font.ITALIC, 18));
+        textarea.setLineWrap(true);
+        textarea.setWrapStyleWord(true);
+
+        lab1 = new JLabel();
+        lab1.setBounds(25, 25, 200, 50);
+        lab1.setFont(new Font("Arial", Font.BOLD, 12));
+
+        btn = new JButton("Count Words");
+        btn.setBounds(25, 470, 200, 50);
+        btn.setFont(new Font("Arial", Font.BOLD, 12));
+        btn.addActionListener(this);
+
+        this.add(lab1);
+        this.add(textarea);
+        this.add(btn);
+
+        this.setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent evt) {
+        if (evt.getSource() == btn) {
+            String str = textarea.getText();
+            String words[] = str.split("\\s+");
+            lab1.setText("The number of words is : " + words.length);
+        }
+    }
+
+    public static void main(String[] args) {
+        MyFrame frame = new MyFrame();
+    }
+}
